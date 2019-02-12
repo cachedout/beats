@@ -122,7 +122,7 @@ func (m *MetricSet) checkCCRAvailability(currentElasticsearchVersion *common.Ver
 		message = "the CCR feature is available with a platinum Elasticsearch license. " +
 			"You currently have a " + license.Type + " license. " +
 			"Either upgrade your license or remove the ccr metricset from your Elasticsearch module configuration."
-		return
+		return message
 	}
 
 	isAvailable := elastic.IsFeatureAvailable(currentElasticsearchVersion, elasticsearch.CCRStatsAPIAvailableVersion)
@@ -132,7 +132,7 @@ func (m *MetricSet) checkCCRAvailability(currentElasticsearchVersion *common.Ver
 		message = "the " + metricsetName + " is only supported with Elasticsearch >= " +
 			elasticsearch.CCRStatsAPIAvailableVersion.String() + ". " +
 			"You are currently running Elasticsearch " + currentElasticsearchVersion.String() + "."
-		return
+		return message
 	}
 
 	return "", nil
